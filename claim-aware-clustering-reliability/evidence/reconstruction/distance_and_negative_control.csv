@@ -1,5 +1,0 @@
-scaler,weight,clinical_mean_sq_distance,util_mean_sq_distance,clinical_share,valid_sampled_pairs,experiment,full_vs_shuffled_util_only_ari,interpretation
-robust,1.0,5.196474823741187,3.2276613830691536,0.6168555085256326,19999.0,,,
-standard,1.0,5.196474823741187,6.028690581060369,0.46293080202795045,19999.0,,,
-robust,1.0,,,,,joint_utilization_shuffle_control,1.0,Breaks clinical/util pairing while keeping util rows intact
-standard,1.0,,,,,joint_utilization_shuffle_control,0.9715132745748086,Breaks clinical/util pairing while keeping util rows intact

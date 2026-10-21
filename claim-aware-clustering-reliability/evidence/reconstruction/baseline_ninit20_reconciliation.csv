@@ -1,3 +1,0 @@
-scaler,weight,n_init,seed,development_cluster_sizes_sorted,heldout_cluster_sizes_sorted,development_silhouette_sampled,development_utilization_ari,inertia,historical_ari,historical_comparison,heldout_historical_ari
-robust,1.0,20,42,"[620, 9380]","[3820, 57698]",0.4429578234807921,1.0,35740.523629960604,,NOT_SUPPLIED,
-standard,1.0,20,42,"[801, 9199]","[4630, 56888]",0.5081247412806852,0.893751530529126,48286.40088620833,,NOT_SUPPLIED,

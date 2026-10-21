@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite the archived software release and associated manuscript."
+title: "Claim-Aware Reliability Audit for Patient Clustering"
+type: software
+authors:
+  - family-names: Chatterjee
+    given-names: Anjan
+version: 0.9.0
+abstract: >-
+  Research code and aggregate evidence for a claim-aware reliability audit
+  of clustering on the UCI Diabetes 130-US Hospitals dataset. The archived
+  primary and reconstructed analyses are separate experimental streams.
+keywords:
+  - clustering reliability
+  - healthcare informatics
+  - missing-data robustness
+  - specification sensitivity
+license: MIT

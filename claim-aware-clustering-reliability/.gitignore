@@ -1,0 +1,35 @@
+# Local Python and notebook files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store
+
+# Local inputs, identifiers, models and rerun outputs
+*.parquet
+*.pkl
+*.joblib
+*.sqlite
+*.db
+/data/
+/work/
+/outputs/
+/figures/generated/
+**/diabetic_data.csv
+**/IDs_*.csv
+**/*patient_assignments*.csv
+**/*split_manifest*.csv
+**/*patient_profiles*.csv
+**/run_manifest.json
+**/characterization_manifest.json
+
+# Credentials and environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json

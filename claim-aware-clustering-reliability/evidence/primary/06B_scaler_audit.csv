@@ -1,0 +1,4 @@
+feature,zero_fraction,median,IQR,robust_center,robust_scale
+number_outpatient,0.8736,0.0,0.0,0.0,1.0
+number_emergency,0.9287,0.0,0.0,0.0,1.0
+number_inpatient,0.8863,0.0,0.0,0.0,1.0

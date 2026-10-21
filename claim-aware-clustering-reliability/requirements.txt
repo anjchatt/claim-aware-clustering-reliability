@@ -1,0 +1,8 @@
+# Environment used for local checks of this release candidate (Python 3.13).
+# These are not the original executed experiment package versions.
+matplotlib==3.10.8
+numpy==2.3.5
+pandas==2.2.3
+scikit-learn==1.8.0
+scipy==1.17.0
+threadpoolctl==3.6.0

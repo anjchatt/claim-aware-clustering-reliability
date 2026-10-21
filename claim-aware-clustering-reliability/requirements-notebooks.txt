@@ -1,0 +1,4 @@
+-r requirements.txt
+# Optional: only needed when opening the historical Parquet-based notebooks.
+pyarrow>=18,<24
+jupyterlab>=4,<5

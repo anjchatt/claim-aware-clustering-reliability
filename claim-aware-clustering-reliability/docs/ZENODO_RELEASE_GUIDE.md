@@ -12,7 +12,7 @@
 Complete `docs/PREPUBLICATION_GAPS.md` and check the exact release content before making it public.
 
 1. Push the reviewed repository to GitHub, initially as **Private**. Check for private datasets, patient IDs, keys, or local artifacts. The GitHub README is already included.
-2. Confirm the `CITATION.cff` author list and `LICENSE` selection. Run `python -m unittest discover -s tests -v` and `python scripts/check_release_evidence.py`.
+2. Confirm the `CITATION.cff` author list and `LICENSE` selection. Run `python -m unittest discover -s tests -v` and `python scripts/verify_release_files.py`.
 3. When ready for a public software release, make the reviewed repository public. In Zenodo, select the profile menu and **GitHub**, click **Sync now**, locate the repository, and switch its integration on.
 4. On GitHub, create a release from a reviewed commit: **Releases > Draft a new release**. Use a tag such as `v1.0.0`, enter a short description of the included experiments and remaining limitations, and publish the release. Zenodo processes enabled GitHub releases and creates the archived software record.
 5. Inspect the Zenodo record, including the authors, license, files, version, and DOI. Add that versioned DOI to the manuscript after the Zenodo record is live. Do not invent a DOI in `CITATION.cff` beforehand.

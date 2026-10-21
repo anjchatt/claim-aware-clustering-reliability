@@ -35,11 +35,11 @@ def opts():
     p.add_argument('--dev-meta',type=Path)
     p.add_argument('--heldout-meta',type=Path)
     p.add_argument('--split-manifest',type=Path)
-    p.add_argument('--validator',type=Path,required=True,help='Path to jbhi_06C_validation_v2.py')
+    p.add_argument('--validator',type=Path,required=True,help='Path to analyze_weight_scaling.py')
     p.add_argument('--run-manifest',type=Path,help='Manifest corresponding to submitted 480 fit run')
     p.add_argument('--reference-fit-csv',type=Path,help='Saved fit_level_seed_runs(2).csv from n_init=20 run')
     p.add_argument('--reference-cross-csv',type=Path,help='Saved cross_weight_partition_agreement(2).csv')
-    p.add_argument('--out',type=Path,default=Path('JBHI_w060_characterization'))
+    p.add_argument('--out',type=Path,default=Path('weighted_cluster_characterization'))
     p.add_argument('--seed',type=int,default=42)
     p.add_argument('--seeds-per-weight',type=int,default=40)
     p.add_argument('--n-init',type=int,default=20)
@@ -49,7 +49,7 @@ def opts():
     return p.parse_args()
 
 def get_module(path):
-    spec=importlib.util.spec_from_file_location('jbhi_06C_existing',str(path))
+    spec=importlib.util.spec_from_file_location('reconstruction_analysis',str(path))
     mod=importlib.util.module_from_spec(spec);spec.loader.exec_module(mod)
     return mod
 

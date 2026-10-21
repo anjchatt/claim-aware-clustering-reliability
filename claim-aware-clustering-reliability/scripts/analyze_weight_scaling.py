@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""JBHI 06C: auditable validation of weight/preprocessing sensitivity in R2 K-means.
+"""Examine utilization weighting and preprocessing choices in R2 clustering.
 
-This is an extension audit, not an automatic reproduction of the authors' original
-Notebooks 01--06B. See README.md for the provenance boundary and data contracts.
+The public-data reconstruction is separate from the original study. Its
+results should not be interpreted as a row-matched replication.
 """
 from __future__ import annotations
 import argparse
@@ -40,7 +40,7 @@ def parse_args():
     p.add_argument("--split-manifest", type=Path, help="CSV columns patient_nbr, split (development/heldout) for --raw-csv")
     p.add_argument("--historical-dev-labels", type=Path, help="CSV patient_nbr,label from original 06B development R2 baseline")
     p.add_argument("--historical-heldout-labels", type=Path, help="CSV patient_nbr,label from original held-out R2 baseline")
-    p.add_argument("--out", type=Path, default=Path("jbhi_06C_results"))
+    p.add_argument("--out", type=Path, default=Path("weight_scaling_results"))
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--seeds-per-weight", type=int, default=40,
                    help="Independent KMeans fits per weight")
@@ -489,7 +489,7 @@ def main():
     if not hm.empty and len(hm)!=len(held) and not a.skip_heldout:
         raise ValueError("Heldout metadata not aligned")
     manifest={
-        "title": "JBHI 06C R2 K-means specification sensitivity audit",
+        "title": "R2 K-means specification sensitivity audit",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "status": status, "quick_smoke_test": a.quick, "n_development":len(dev),"n_heldout":len(held),
         "reproduction_policy":"Reported v11/v12 values are NOT automatically established by running this script",
@@ -627,7 +627,7 @@ def main():
                            "status":"NOT_COMPARABLE_UNTIL_PIPELINE_AND_SPLIT_RECONCILED",
                            "note":"A numerical match alone cannot prove same data/methodology; divergence may reflect changed specification."})
     write_csv(validation,a.out/"MANUSCRIPT_CLAIM_COMPARISON_NOT_VERIFICATION.csv")
-    md=["# JBHI 06C: reproducibility and evidence report", "",
+    md=["# Reconstruction: reproducibility and evidence report", "",
         f"**Status:** `{status}`",f"**Execution type:** {'quick test, not publishable' if a.quick else 'extended audit, subject to 06B reconciliation'}",
         f"**Sample:** {len(dev):,} development; {len(held):,} held-out.",
         f"**Weights:** {', '.join(f'{w:g}' for w in a.weights)}. **Independent seeds:** {a.seeds_per_weight} per specification (n_init={a.audit_n_init} each).",

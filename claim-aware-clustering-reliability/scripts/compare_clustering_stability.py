@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""JBHI 06D: optional complementary clustering-stability comparators.
+"""Compute optional Jaccard and prediction-strength stability comparisons.
 
-Optional research comparison; not part of the reported JBHI results.
-These are additional diagnostics, not substitutes for
-clinical adjudication, independent cohorts, or exact historical reproduction.
+These exploratory measures were not part of the published main analysis.
 """
 from __future__ import annotations
 import argparse
@@ -20,7 +18,7 @@ from sklearn.cluster import KMeans
 from sklearn.model_selection import train_test_split
 from threadpoolctl import threadpool_limits
 
-from jbhi_06C_validation_v2 import load_raw, load_matrix, transforms, sha256
+from analyze_weight_scaling import load_raw, load_matrix, transforms, sha256
 
 
 def cli():
@@ -30,7 +28,7 @@ def cli():
     inp.add_argument('--dev-matrix',type=Path)
     p.add_argument('--split-manifest',type=Path)
     p.add_argument('--dev-meta',type=Path)
-    p.add_argument('--out',type=Path,default=Path('jbhi_06D_results'))
+    p.add_argument('--out',type=Path,default=Path('stability_comparison_results'))
     p.add_argument('--seed',type=int,default=42)
     p.add_argument('--bootstrap-reps',type=int,default=30)
     p.add_argument('--prediction-reps',type=int,default=30)

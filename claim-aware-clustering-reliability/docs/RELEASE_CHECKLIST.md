@@ -2,7 +2,7 @@
 
 - [ ] Review `docs/PREPUBLICATION_GAPS.md`, recover missing executed source and masks, and reconcile the 17-artifact claim.
 - [ ] Check the primary and reconstruction experiment identities separately. Record original software versions and source data license.
-- [ ] Run `python -m unittest discover -s tests -v` and `python scripts/check_release_evidence.py`.
+- [ ] Run `python -m unittest discover -s tests -v` and `python scripts/verify_release_files.py`.
 - [ ] Confirm all included research outputs have the appropriate evidence status; manuscript-reported CSV entries are not raw reruns.
 - [ ] Confirm authorship in `CITATION.cff` and that the MIT license is appropriate for the original research code.
 - [ ] Review notebook code, outputs, metadata and paths for private information. Do not include raw UCI/MIMIC clinical records or patient-level files by default.

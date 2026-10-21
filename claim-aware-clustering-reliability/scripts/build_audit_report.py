@@ -1,22 +1,9 @@
 #!/usr/bin/env python3
-"""JBHI Section V: provenance-aware reporting and visualisation add-on.
+"""Prepare review records and figures from the available clustering evidence.
 
-This script DOES NOT refit K-means, manufacture patient labels, validate phenotypes,
-or establish that the 06C reconstruction reproduces the primary cohort.
-
-Inputs:
-  - Primary candidate summary CSV (values reported in manuscript Table II)
-  - 06C multistart vs single-start summary and weight-pair ARI CSV exports
-  - Optional distance/negative-control CSV export
-  - Optional TWO patient-level CSV files for a genuine transition matrix
-
-Outputs:
-  - Six-candidate review-evidence JSON/CSV (5 primary + 1 distinct reconstruction)
-  - Figures: audit evidence matrix, restart seed stability, cross-weight ARI,
-    optional feature-distance shares and optional patient transition matrix
-  - audit_manifest.json recording SHA-256 hashes and exact CLI/settings
-
-All review thresholds are exploratory and post hoc; no clinical acceptance is implied.
+The primary summary contains manuscript-reported statistics. This script
+visualizes existing results; it does not reconstruct patient-level evidence
+or establish clinical validity.
 """
 from __future__ import annotations
 
@@ -38,7 +25,7 @@ from matplotlib.colors import ListedColormap
 from scipy.optimize import linear_sum_assignment
 from sklearn.metrics import adjusted_rand_score
 
-SCHEMA = "JBHI-claim-audit/0.2.0"
+SCHEMA = "claim-aware-audit/0.2.0"
 PRIMARY_COLUMNS = ["candidate_id", "cohort_id", "silhouette", "seed_ari", "subsample_ari", "refit_masking_ari_20pct", "utilization_only_ari", "reported_source"]
 THRESHOLDS = {"seed_ari_min": .80, "subsample_ari_min": .80, "refit_masking_ari_min": .70,
               "utilization_equivalence_ari_min": .95, "cross_specification_ari_min": .80}
@@ -371,14 +358,14 @@ def main():
                "The uploaded reconstruction run's original Python and scikit-learn versions CANNOT be inferred from this environment.",
                "Do not interpret post hoc flags as clinical safety thresholds.",
                "Please verify primary values, simulation settings and reconstruction run_manifest against original executed scripts."],
-      "optional_patient_transition_computed":trans is not None},a.out/"sectionV_audit_manifest.json")
+      "optional_patient_transition_computed":trans is not None},a.out/"audit_report_manifest.json")
     (a.out/"figure_captions.txt").write_text(
       "Fig. A. Claim-aware primary-candidate evidence matrix (development n=10,000). "
       "Silhouette is descriptive; other flags use uncalibrated retrospective review criteria. "
       "NE indicates not evaluated and N/A not applicable. Source: reported manuscript Table II.\n\n"
       "Fig. B. Matched single-restart versus 20-restart mean pairwise seed ARI in the separate raw-source R2 reconstruction "
       "(40 independent seeded fits per weight, six shared utilization weights, robust and standard scaling). "
-      "Source: JBHI_06C_ninit1_vs_ninit20_comparison.csv.\n\n"
+      "Source: restart_budget_comparison.csv.\n\n"
       "Fig. C. Development patient-partition agreement between minimum-inertia K-means fits at each pair of utilization weights. "
       "Robust and standard scaling shown separately. Source: cross_weight_partition_agreement.csv; "
       "this is NOT primary cohort replication or independent held-out fitting.\n\n"

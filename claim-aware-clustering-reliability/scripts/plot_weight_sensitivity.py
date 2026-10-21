@@ -1,23 +1,7 @@
-"""Reproduce JBHI Figure 3 from VERIFIED primary 06B weight-sweep CSVs.
+"""Plot the primary R2 utilization-weight sweep from saved aggregate results.
 
-Primary R2 (not the separate R2 reconstruction): 15 tested utilization
-weights; 5 independently seeded fits per weight, K-means n_init=10.
-
-Requirements
-    pip install matplotlib pandas numpy
-
-From the repository root
-    python scripts/JBHI_Figure3_HighResolution.py
-
-From a Jupyter notebook opened at the repository root
-    %run scripts/JBHI_Figure3_HighResolution.py
-
-Outputs in figures/generated
-    JBHI_Fig3_Weight_Sweep_TwoPanel.png/.pdf/.svg
-    JBHI_Fig3_Transition_Column.png/.pdf/.svg
-
-Note: Lines connect discretely evaluated weight settings; the apparent change
-is exploratory and is not an estimated universal transition threshold.
+The lines connect tested weight settings; they do not estimate a universal
+threshold. No clustering is refitted by this script.
 """
 from __future__ import annotations
 
@@ -156,7 +140,7 @@ def build_two_panel(df: pd.DataFrame, outdir: Path):
                frameon=False, fontsize=8.3)
     fig.subplots_adjust(left=.075, right=.986, bottom=.235,
                         top=.76, wspace=.18)
-    save_triplet(fig, outdir, 'JBHI_Fig3_Weight_Sweep_TwoPanel')
+    save_triplet(fig, outdir, 'weight_sensitivity_overview')
 
 
 def build_one_column(df: pd.DataFrame, outdir: Path):
@@ -169,11 +153,11 @@ def build_one_column(df: pd.DataFrame, outdir: Path):
                loc='lower center', bbox_to_anchor=(.52, .005),
                ncol=1, handlelength=2.0, frameon=False, fontsize=7.4)
     fig.subplots_adjust(left=.17, right=.98, bottom=.41, top=.88)
-    save_triplet(fig, outdir, 'JBHI_Fig3_Transition_Column')
+    save_triplet(fig, outdir, 'weight_sensitivity_detail')
 
 
 def main():
-    p = argparse.ArgumentParser(description='Replot validated JBHI primary 06B weight sweep')
+    p = argparse.ArgumentParser(description='Plot the primary R2 weight sweep from saved CSV results')
     p.add_argument('--sweep', type=Path, default=HERE.parent / 'evidence' / 'primary' / SWEEP_NAME)
     p.add_argument('--seeds', type=Path, default=HERE.parent / 'evidence' / 'primary' / STABILITY_NAME)
     p.add_argument('--output-dir', type=Path, default=HERE.parent / 'figures' / 'generated')
@@ -185,7 +169,7 @@ def main():
     build_two_panel(data, args.output_dir)
     build_one_column(data, args.output_dir)
     print(f'Verified source records: {len(data)} tested weights for {args.representation}.')
-    print('Primary 06B: 5 seeded fits/weight, n_init=10. Not the separate reconstruction.')
+    print('Primary analysis: 5 seeded fits/weight, n_init=10. Not the reconstruction.')
 
 if __name__ == '__main__':
     main()

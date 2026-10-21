@@ -1,16 +1,8 @@
 #!/usr/bin/env python3
-"""JBHI evidence tracker and optional targeted validation.
+"""Check saved experiment outputs and optionally run diagnosis masking.
 
-READ-ONLY with respect to source data, reference CSVs, and existing models.
-New derived results are written under --out only.
-
-Default: verify saved characterization, summarize 20-run primary masking,
-        verify reconstructed label transition, and cross-tabulate primary R1
-        against circulatory diagnosis family 2 when source profiles exist.
-Optional --run-reconstruction-masking: reproduce development-fitted selected
-        w=.6 and w=1.0 models, then test fixed-model diagnosis-position masking.
-
-No primary/reconstruction patient-level equivalence is inferred.
+Reference files are read without modification. Derived results are written
+under the requested output directory. The two patient splits are independent.
 """
 from __future__ import annotations
 import argparse
@@ -122,7 +114,7 @@ class Audit:
             "checks": self.events,
         }
         (self.out / "validation_manifest.json").write_text(json.dumps(payload, indent=2, default=str), encoding="utf-8")
-        lines = ["JBHI VALIDATION SNAPSHOT", "Generated: " + payload["generated_at_utc"], "",
+        lines = ["EXPERIMENT VALIDATION SUMMARY", "Generated: " + payload["generated_at_utc"], "",
                  "Do not treat skipped tests as passed or combine primary/reconstruction records.", ""]
         lines.extend(f"[{e['status']}] {e['evidence_id']}: {e['details']}" for e in self.events)
         lines.append("\nSource hashes and run protocol are stored in validation_manifest.json.")
@@ -224,7 +216,7 @@ def check_primary_r1_indicator(a, audit):
 
 
 def reimport(path):
-    spec = importlib.util.spec_from_file_location("jbhi_existing_06c", path)
+    spec = importlib.util.spec_from_file_location("reconstruction_analysis", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return mod
@@ -235,7 +227,9 @@ def new_reconstruction_position_masking(a, audit, characterization):
     No historical primary inference and no preprocessing refit.
     """
     raw = a.raw_csv
-    validator = a.project / "jbhi_06C_validation_v2.py"
+    validator = a.project / "analyze_weight_scaling.py"
+    if not validator.is_file():
+        validator = Path(__file__).resolve().parent / "analyze_weight_scaling.py"
     labels_path = a.project / "w060_characterization" / "patient_assignments_w060_w100.csv"
     fit_ref = a.project / "fit_level_seed_runs_ninit20_REFERENCE.csv"
     for p in (raw, validator, labels_path, fit_ref): audit.source(p)

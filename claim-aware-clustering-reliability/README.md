@@ -16,7 +16,7 @@ The primary analysis and the reconstruction are separate studies of the same sou
 
 | Folder | Purpose |
 |---|---|
-| `scripts/` | Original analysis scripts, figure generation, optional 06D comparator, and a release-evidence check. |
+| `scripts/` | Clustering analysis, diagnostic validation, figure generation, and release checks. |
 | `notebooks/` | Available primary 06B notebook, historical notebook 04, and local runners. |
 | `evidence/primary/` | Saved aggregate results from the primary 06B study. |
 | `evidence/reconstruction/` | 06C reconstruction fit-level and aggregate results. |
@@ -33,8 +33,8 @@ From PowerShell in the repository folder:
 py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
-.\.venv\Scripts\python.exe scripts\JBHI_Figure3_HighResolution.py
-.\.venv\Scripts\python.exe scripts\check_release_evidence.py
+.\.venv\Scripts\python.exe scripts\plot_weight_sensitivity.py
+.\.venv\Scripts\python.exe scripts\verify_release_files.py
 ```
 
 These commands check the packaged evidence and regenerate Figure 3. They do not reproduce the complete cohort creation or all patient-level experiments. Source data must be downloaded independently and the original run configurations restored to reproduce the patient-level results.
@@ -54,3 +54,13 @@ We do not distribute the raw UCI download, MIMIC-IV records, patient-level extra
 The repository has an MIT software license and a `CITATION.cff` template populated with the currently documented contributor. Before any public release, confirm that the final author list and licensing permissions are correct, and that third-party material is not covered by the code license inadvertently.
 
 For a durable citation, publish a versioned GitHub release and archive it with Zenodo. [Zenodo instructions](docs/ZENODO_RELEASE_GUIDE.md) cover both GitHub integration and a direct-upload draft. A DOI should be added to the manuscript only after publication of a verified archive.
+
+## Script names
+
+Script filenames describe their purpose and use lowercase `snake_case`.
+Experiment labels such as R1, R2, 06B and 06C remain in the scientific evidence
+because they distinguish the original analysis from subsequent reconstructions.
+See [the filename map](docs/SCRIPT_NAMES.md) for renamed files and notebook runners.
+
+If this repository was already pushed to GitHub, use `update_existing_repo.ps1`
+from this download to apply the rename as a new commit. Git history is preserved.

@@ -1,0 +1,32 @@
+{
+  "data_status": "reconstruction aggregate CSV inputs; no model rerun",
+  "source_files": [
+    {
+      "file": "feature_block_concentration.csv",
+      "sha256": "49900b3f3baf8abc2a6602bff94723b92d6c3f23bd0d1e5aa8457f9168cc03a7"
+    },
+    {
+      "file": "aligned_transition.csv",
+      "sha256": "9e10890b11568b45ac5f71365a50591e88f0cb2b8fe86d2ca8f5504c72d60476"
+    }
+  ],
+  "n_dev": 10000,
+  "weight_values": [
+    0.6,
+    1.0
+  ],
+  "diag2_share_at_w060_pct": 88.42394884478658,
+  "utilization_share_at_w100_pct": 99.93109235760868,
+  "aligned_transition": [
+    [
+      6449,
+      435
+    ],
+    [
+      2931,
+      185
+    ]
+  ],
+  "changed_assignments": 3366,
+  "changed_pct": 33.66
+}

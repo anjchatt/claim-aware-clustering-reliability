@@ -1,0 +1,16 @@
+{
+  "description": "Primary R2 weight sweep: 15 weights, five seeds, 10 restarts",
+  "inputs": [
+    {
+      "file": "06B_weight_sweep.csv",
+      "sha256": "1a2136c34fb1eda6b5850c982bbb46624bdbbcd837803200924c35d6b1c753b1"
+    },
+    {
+      "file": "06B_seed_stability.csv",
+      "sha256": "6f91f43888860eeb637e85e436e4702a100f77fb269a2df6aa543c6b6798523a"
+    }
+  ],
+  "n_tested_weights": 15,
+  "plot": "figure3.png, figure3.pdf, figure3.svg",
+  "notes": "Lines join tested weights; shaded range is min\u2013max across seeded fits."
+}

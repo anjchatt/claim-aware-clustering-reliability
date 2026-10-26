@@ -1,0 +1,2 @@
+representation,k,development_patients,heldout_patients,development_ari,heldout_ari,seed,n_init,algorithm,lab_flag_source,development_r3_sha256,index_cohort_sha256,raw_csv_sha256,scikit_learn_version
+R3,2,10000,61518,1.0,1.0,42,20,lloyd,cohort raw test categories,2550619bc347f2e1697c0e930332387f72e864c592920dafaf9605f36fb49895,6453d7dcb3d46bd496c64e5626a275c6618785dac632b86b9d7ff57b855c187a,,1.9.1
